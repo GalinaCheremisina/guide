@@ -1,0 +1,18 @@
+@if (!!homeItem) {
+<div class="home-item-wrapper" (click)="showDetailsPage()">
+  <div class="home-item-img">
+    <img [src]="homeItem.image" />
+  </div>
+  <div class="home-item-desc">
+    <div>
+      <p class="home-title">{{ homeItem.title }}</p>
+      <p>{{ "RENT.FILTER.LOCATION." + homeItem.location | translate }}</p>
+    </div>
+    <div>
+      <p class="home-price">
+        {{ "RENT.PRICE_FROM" | translate }} {{ getStartPrice() }}$
+      </p>
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,6 @@
+<h1>{{ "RENT.TITLE" | translate }}</h1>
+<div class="wrapper-info">
+  @for (item of rentItems; track item.id) {
+  <app-info-item [item]="item" />
+  }
+</div>

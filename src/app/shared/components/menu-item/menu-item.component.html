@@ -1,0 +1,20 @@
+@if (menuItem) { @if (menuItemType === "parent") {
+<a
+  [class.section]="menuItemType === 'parent'"
+  [class.active]="isActiveMenu(menuItem.link)"
+  [routerLink]="menuItem.link"
+>
+  <span>
+    <ng-content></ng-content>
+  </span>
+  <span>
+    {{ 'COMMON.MAIN_MENU' + '.' + menuItem.title | translate }}
+  </span>
+</a>
+} @else {
+<li>
+  <a [routerLink]="menuItem.link" (click)="hideMenuList.next(true)">
+    {{ 'COMMON.MAIN_MENU' + '.' + menuItem.title | translate }}
+  </a>
+</li>
+} }

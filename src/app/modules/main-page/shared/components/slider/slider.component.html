@@ -1,0 +1,38 @@
+<div class="slider">
+  <div class="previews">
+    @for (image of (images$ | async); track image; let index = $index; let first
+    = $first, last = $last) {
+    <img
+      [ngClass]="{
+        'first-level': first || last,
+        'second-level': index == 1 || index == 4,
+        'b-rotate': index == 4
+      }"
+      [ngSrc]="image"
+      height="120"
+      width="180"
+    />
+
+    }
+  </div>
+  <div class="main-img">
+    <button
+      mat-icon-button
+      aria-label
+      [disabled]="!currentImgIndex$.value"
+      (click)="changeImgIndex(currentImgIndex$.value, 'dec')"
+    >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <div *ngIf="mainImageSrc$ | async as mainImageSrc" class="home-image">
+      <img [ngSrc]="mainImageSrc" width="900" height="400" priority />
+    </div>
+    <button
+      mat-icon-button
+      aria-label
+      (click)="changeImgIndex(currentImgIndex$.value)"
+    >
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+  </div>
+</div>

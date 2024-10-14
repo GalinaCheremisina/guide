@@ -1,0 +1,62 @@
+<div class="dialog-wrapper">
+  <h2>{{ "RENT.FORM.TITLE" | translate }}</h2>
+  <div class="dialog-info">
+    <h3>{{ title }}</h3>
+    <img [src]="img" />
+  </div>
+  <div class="dialog-form">
+    @if (sended$ | async) {
+      <div class="dialog-form-result">
+        <h2>{{ "RENT.FORM.SENT" | translate }}</h2>
+        <p>{{ "RENT.FORM.DESC" | translate }} {{form.get('type')?.value}}.</p>
+      </div>
+    } @else {
+      <form [formGroup]="form">
+        <mat-form-field class="input-full-width">
+          <mat-label>{{ "RENT.FORM.PHONE" | translate }}</mat-label>
+          <input
+            formControlName="phone"
+            matInput
+            type="number"
+            placeholder="+79009009090"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <mat-label>{{ "RENT.FORM.NAME" | translate }}</mat-label>
+          <input formControlName="name" matInput />
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <mat-label>{{ "RENT.FILTER.MONTH.TITLE" | translate }}</mat-label>
+          <mat-select formControlName="month">
+            @for (month of months; track month) {
+            <mat-option [value]="month">
+              {{ "RENT.FILTER.MONTH." + month | translate }}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="input-full-width checkbox">
+          <p>{{ "RENT.FORM.PREFER" | translate }}</p>
+          <mat-radio-group formControlName="type">
+            <mat-radio-button value="Telegram">Telegram</mat-radio-button>
+            <mat-radio-button value="WhatsApp">WhatsApp</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </form>
+    }
+    <div>
+      <button class="active-gray-button" (click)="close()">
+        {{ "RENT.FORM.CLOSE" | translate }}
+      </button>
+      @if (!(sended$ | async)) {
+      <button
+        class="active-button"
+        (click)="sendMessage()"
+        [disabled]="noValid(form.get('phone')?.value, form.get('month')?.value)"
+      >
+        {{ "RENT.FORM.SEND" | translate }}
+      </button>
+      }
+    </div>
+  </div>
+</div>

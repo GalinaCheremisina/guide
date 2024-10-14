@@ -1,0 +1,6 @@
+<h1>{{ "LEISURE.TITLE" | translate }}</h1>
+<div class="wrapper-info">
+  @for (item of items; track item.id) {
+  <app-info-item [item]="item" />
+  }
+</div>

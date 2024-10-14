@@ -1,0 +1,30 @@
+<div class="home-filter-wrapper">
+  <mat-form-field>
+    <mat-label>{{ "RENT.FILTER.MONTH.TITLE" | translate }}</mat-label>
+    <mat-select [value]="filter?.month">
+      @for (month of months; track month) {
+      <mat-option [value]="month" (click)="monthSelected.next(month)">
+        {{ "RENT.FILTER.MONTH." + month | translate }}
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "RENT.FILTER.LOCATION.TITLE" | translate }}</mat-label>
+    <mat-select [value]="filter?.location">
+      @for (location of locations; track location) {
+      <mat-option [value]="location" (click)="locationSelected.next(location)">
+        {{ "RENT.FILTER.LOCATION." + location | translate }}
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <button
+    mat-flat-button
+    class="active-gray-button"
+    [disabled]="!filter?.location && !filter?.month"
+    (click)="clearFilter.next()"
+  >
+  {{ "RENT.FILTER.CLEAR" | translate }}
+  </button>
+</div>

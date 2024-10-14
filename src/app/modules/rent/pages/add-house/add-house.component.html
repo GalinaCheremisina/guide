@@ -1,0 +1,105 @@
+<div class="dialog-wrapper">
+  <h2>{{ "RENT.FORM.ADD_TITLE" | translate }}</h2>
+  <div class="dialog-form">
+    @if (sended$ | async) {
+    <div class="dialog-form-result">
+      <h2>{{ "RENT.FORM.SENT" | translate }}</h2>
+      <h2>
+        {{ "RENT.FORM.PHOTOS_DESC" | translate }} -
+        <a class="link" href="https://t.me/oludeniz_vinojak" target="_blank">Galina</a>
+      </h2>
+      <p>{{ "RENT.FORM.PHOTOS_DESC_2" | translate }}</p>
+      <button
+        class="active-button"
+        (click)="refreshForm()"
+      >
+        {{ "RENT.FORM.SEND_MORE" | translate }}
+      </button>
+    </div>
+    } @else {
+    <form [formGroup]="form">
+      <mat-form-field class="input-full-width">
+        <mat-label>{{ "RENT.FORM.PHONE_OWNER" | translate }}</mat-label>
+        <input
+          formControlName="phoneOwner"
+          matInput
+          type="number"
+          placeholder="+905005005050"
+        />
+      </mat-form-field>
+      <mat-form-field class="input-full-width">
+        <mat-label>{{ "RENT.FORM.NAME_OWNER" | translate }}</mat-label>
+        <input formControlName="nameOwner" matInput />
+      </mat-form-field>
+      <div class="input-full-width checkbox">
+        <p>{{ "RENT.FORM.HOUSE_TYPE" | translate }}</p>
+        <mat-radio-group formControlName="type">
+          <mat-radio-button value="Villa">Villa</mat-radio-button>
+          <mat-radio-button value="Flat">Flat</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field class="input-full-width">
+        <mat-label>{{ "RENT.FORM.HOUSE_NAME" | translate }}</mat-label>
+        <input formControlName="nameHouse" matInput />
+      </mat-form-field>
+      <mat-form-field class="input-full-width">
+        <mat-label>{{ "RENT.FORM.HOUSE_DESC" | translate }}</mat-label>
+        <textarea formControlName="descHouse" matInput></textarea>
+      </mat-form-field>
+      <p>{{ "RENT.FORM.AVAILIABLE_MONTHS" | translate }}</p>
+      <div formArrayName="prices" class="input-full-width prices-list">
+        @for (item of getPricesControls(); track item; let i = $index) {
+        <div [formGroupName]="i" class="prices-list__item">
+          <mat-form-field class="input-half-width">
+            <mat-label>{{ "RENT.FILTER.MONTH.TITLE" | translate }}</mat-label>
+            <mat-select formControlName="priceMonth">
+              @for (month of months; track month) {
+              <mat-option [value]="month">
+                {{ "RENT.FILTER.MONTH." + month | translate }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="input-half-width" floatLabel="always">
+            <mat-label>{{ "RENT.FORM.SMALLEST_PRICE_FOR_MONTH" | translate }}</mat-label>
+            <input
+              formControlName="priceAmount"
+              matInput
+              type="number"
+              placeholder="30"
+            />
+            <span matTextPrefix>$&nbsp;</span>
+          </mat-form-field>
+          <button mat-fab extended (click)="removePriceItem(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        }
+        <button
+          class="active-button"
+          (click)="addPriceItem()"
+          [disabled]="!form.get('prices')?.valid"
+        >
+          {{ "RENT.FORM.ADD_MONTH" | translate }}
+        </button>
+      </div>
+    </form>
+    <h2>
+      {{ "RENT.FORM.PHOTOS_DESC" | translate }} -
+      <a class="link" href="https://t.me/oludeniz_vinojak" target="_blank">Galina</a>
+    </h2>
+    <p>{{ "RENT.FORM.PHOTOS_DESC_2" | translate }}</p>
+    }
+    <div>
+      @if (!(sended$ | async)) {
+      <button
+        class="active-button"
+        (click)="sendMessage()"
+        [disabled]="!form.valid || !getPricesControls().length"
+      >
+        {{ "RENT.FORM.SEND_FORM" | translate }}
+      </button>
+      }
+    </div>
+  </div>
+</div>

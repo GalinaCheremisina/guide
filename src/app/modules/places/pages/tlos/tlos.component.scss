@@ -1,0 +1,16 @@
+:host {
+  width: 100%;
+
+  img {
+    height: 300px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+  @media (max-width: 470px) {
+    img {
+      height: 120px;
+    }
+  }
+}

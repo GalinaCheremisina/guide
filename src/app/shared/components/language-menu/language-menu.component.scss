@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 1;
+  color: var(--gray-font-light);
+}
+::ng-deep {
+  .mat-mdc-menu-content {
+    background-color: var(--blue-hover);
+
+    .mat-mdc-menu-item,
+    .mat-mdc-menu-item:visited,
+    .mat-mdc-menu-item:link {
+      color: var(--gray-font-light);
+    }
+  }
+  @media (max-width: 470px) {
+    .mat-mdc-fab .mdc-button__label {
+      display: none;
+    }
+    .mat-mdc-extended-fab > .mat-icon,
+    .mat-mdc-extended-fab > .material-icons {
+      margin-right: 0!important;
+      margin-left: 0!important;
+    }
+  }
+}

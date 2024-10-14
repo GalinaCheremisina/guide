@@ -1,0 +1,52 @@
+<ng-container *ngIf="home$ | async as home">
+  <div class="home-wrapper">
+    <div class="home-title">
+      <button mat-icon-button aria-label (click)="goToVillasPage()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>{{ home.title }}</h1>
+    </div>
+    <div class="home-images">
+      <button
+        mat-icon-button
+        aria-label
+        [disabled]="!selectedImgIndex$.value"
+        (click)="changeImgIndex(selectedImgIndex$.value, 'dec')"
+      >
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <div class="home-image">
+        <img [src]="selectedImg$ | async" />
+      </div>
+      <button
+        mat-icon-button
+        aria-label
+        (click)="changeImgIndex(selectedImgIndex$.value)"
+      >
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+    <div class="home-desc">
+      {{ desc$ | async }}
+    </div>
+    <div class="home-price">
+      <h2>{{ "RENT.PRICE" | translate }}</h2>
+      <table>
+        <tbody>
+          @for (item of (pricesList$ | async); track item.month) {
+          <tr>
+            <td>{{ "RENT.FILTER.MONTH." + item.month | translate }}</td>
+            <td>{{ "RENT.FROM" | translate }} {{ item.price }}$</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+      <p>
+        {{ "RENT.PARAGRAPH_1" | translate }}
+      </p>
+      <button class="active-button" (click)="openDialog(home)">
+        {{ "RENT.DETAILS" | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>

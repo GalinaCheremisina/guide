@@ -1,0 +1,17 @@
+<h1>
+  {{ ((isVillaPage$ | async) ? "RENT.VILLAS" : "RENT.APARTMENTS") | translate }}
+</h1>
+
+<div class="villas-filter">
+  <app-filter-rent
+    [filter]="filter$ | async"
+    (monthSelected)="changedMonth($event)"
+    (locationSelected)="changedLocation($event)"
+    (clearFilter)="clearFilter()"
+  />
+</div>
+<div class="villas-items">
+  @for (item of (filteredItems$ | async); track item.id) {
+  <app-home-item [homeItem]="item" />
+  }
+</div>

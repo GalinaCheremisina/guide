@@ -1,0 +1,100 @@
+<div class="mobile-menu" (click)="clickMenu()">
+  <svg viewBox="0 0 24 24" height="24px" width="24px">
+    <use [attr.xlink:href]="'/assets/img/sprite.svg#00'"></use>
+  </svg>
+</div>
+<ul class="menu" [class.hidden]="!(showMobileMenu$ | async)">
+  <ng-container *ngIf="currentUrl$ | async as currentUrl">
+    @for (route of routes; track route; let index = $index) {
+    <li>
+      <app-menu-item
+        [menuItem]="getParentMenuItem(route)"
+        menuItemType="parent"
+        [currentUrl]="currentUrl"
+      >
+        <svg viewBox="0 0 24 24" height="24px" width="24px">
+          <use [attr.xlink:href]="'/assets/img/sprite.svg#' + index"></use>
+        </svg>
+      </app-menu-item>
+      <div>
+        <ul>
+          @for (item of getChildrenMenuItems(route); track item.id) {
+          <app-menu-item [menuItem]="item" (hideMenuList)="showMobileMenu$.next(false)" />
+          }
+        </ul>
+      </div>
+    </li>
+    }
+  </ng-container>
+</ul>
+
+<!--li>
+          <a
+            class="section-link"
+            [class.active]="isActiveMenu(currentUrl, purchasesRoutes.base)"
+            [routerLink]="purchasesRoutes.base"
+          >
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 0 24 24"
+                width="24px"
+                fill="#eceaf1"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M17.21 9l-4.38-6.56c-.19-.28-.51-.42-.83-.42-.32 0-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1h-4.79zM9 9l3-4.4L15 9H9zm3 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+                />
+              </svg>
+            </span>
+            <span>Покупки</span>
+          </a>
+          <div>
+            <ul>
+              <li>
+                <a
+                  [class.sub-active]="isActiveMenu(currentUrl, purchasesRoutes.base)"
+                  [routerLink]="purchasesRoutes.buses"
+                  >еда, аптеки, одежда, сувениры</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a
+            class="section-link"
+            [class.active]="isActiveMenu(currentUrl, leisureRoutes.base)"
+            [routerLink]="leisureRoutes.base"
+          >
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 0 24 24"
+                width="24px"
+                fill="#eceaf1"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <circle cx="15.5" cy="9.5" r="1.5" />
+                <circle cx="8.5" cy="9.5" r="1.5" />
+                <path
+                  d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-5-6c.78 2.34 2.72 4 5 4s4.22-1.66 5-4H7z"
+                />
+              </svg>
+            </span>
+            <span>Досуг</span>
+          </a>
+          <div>
+            <ul>
+              <li>
+                <a
+                  [class.sub-active]="isActiveMenu(currentUrl, leisureRoutes.base)"
+                  [routerLink]="leisureRoutes.buses"
+                  >параглайдинг, бары, ночные клубы, ныряние, корабли</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li-->

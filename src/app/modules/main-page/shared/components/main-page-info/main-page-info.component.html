@@ -1,0 +1,32 @@
+<div class="main-page-info">
+  <h2>{{ "RENT.TITLE" | translate }}</h2>
+  <div class="rent">
+    @for (item of (rentItems$ | async); track item.name) {
+    <div class="rent-item">
+      <a [routerLink]="rentPageLink + item.link">
+        <img [ngSrc]="item.image" height="210" width="260" />
+        <h3>{{ "MAIN_PAGE.ITEMS." + item.link | translate }}</h3>
+      </a>
+    </div>
+    }
+  </div>
+  <h2>{{ "MAIN_PAGE.PARAGRAPH_2" | translate }}</h2>
+  <div class="info">
+    @for (item of (popularItems$ | async); track item.name; let first = $first)
+    {
+    <div class="info-item">
+      <a [routerLink]="placesPageLink + item.link">
+        @if (first) {
+        <img [ngSrc]="item.image" fill />
+        } @else {
+        <img [ngSrc]="item.image" height="240" width="260" />
+        }
+        <div>
+          <h3>{{ "MAIN_PAGE.ITEMS." + item.link | translate }}</h3>
+          <p>{{ "MAIN_PAGE.ITEMS." + item.link + "-desc" | translate }}</p>
+        </div>
+      </a>
+    </div>
+    }
+  </div>
+</div>

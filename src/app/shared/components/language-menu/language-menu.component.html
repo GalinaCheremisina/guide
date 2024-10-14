@@ -1,0 +1,19 @@
+<ng-container *ngIf="currentLanguage$ | async as currentLanguage">
+  <button mat-fab extended [matMenuTriggerFor]="menu">
+    <mat-icon>language</mat-icon>
+    {{ "COMMON.LANGUAGE" + "." + currentLanguage | translate }}
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (lang of list; track lang) {
+    <button
+      mat-menu-item
+      [disabled]="currentLanguage === lang"
+      (click)="changeLanguage(lang)"
+    >
+      <span>
+        {{ "COMMON.LANGUAGE" + "." + lang | translate }}
+      </span>
+    </button>
+    }
+  </mat-menu>
+</ng-container>

@@ -1,0 +1,8 @@
+@if (item) {
+<a [routerLink]="item.link">
+  <img [src]="'/assets/img/' + item.image" />
+  <p>
+    {{ 'COMMON.MAIN_MENU' + '.' + item.title | translate }}
+  </p>
+</a>
+}

@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  a {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--gray-font-light);
+    padding: calc(var(--spacing_3x) - var(--border_width_100)) var(--spacing_4x);
+    transition: var(--animation_press);
+    transition-property: border-color, background-color;
+    border-radius: 8px 8px 0 0;
+
+    &.active {
+      background-color: var(--blue-hover);
+    }
+
+    & > span {
+      display: flex;
+
+      & + span {
+        padding-left: 3px;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &.section:hover {
+      background-color: var(--blue-hover);
+      border-color: var(--gray-font-light);
+      border-bottom-color: transparent;
+      @media (max-width: 470px) {
+        border-bottom-color: var(--gray-font-light);
+      }
+    }
+  }
+
+  li > a {
+    display: block;
+    white-space: nowrap;
+    color: var(--gray-font-light);
+    padding: calc(var(--spacing_3x) - var(--border_width_100)) var(--spacing_4x);
+  }
+}
