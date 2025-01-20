@@ -17,10 +17,12 @@ export class HomeItemComponent {
   @Input() homeItem: VillaItem | undefined;
   @Input() isVillaPage: boolean = true;
 
+  get startPrice() {
+    return this.rentService.getLowerPrice(this.homeItem);
+  }
+
   constructor(private router: Router, private rentService: RentService) {}
 
   showDetailsPage = () =>
     this.router.navigate([this.router.url, this.homeItem?.id]);
-
-  getStartPrice = (): number => this.rentService.getLowerPrice(this.homeItem);
 }

@@ -45,3 +45,4 @@ Thumbs.db
 /src/app/shared/consts
 /src/assets
 .editorconfig
+src/app/shared/services/api.service.ts
