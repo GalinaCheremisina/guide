@@ -30,17 +30,19 @@
       {{ desc$ | async }}
     </div>
     <div class="home-price">
-      <h2>{{ "RENT.PRICE" | translate }}</h2>
-      <table>
-        <tbody>
-          @for (item of (pricesList$ | async); track item.month) {
-          <tr>
-            <td>{{ "RENT.FILTER.MONTH." + item.month | translate }}</td>
-            <td>{{ "RENT.FROM" | translate }} {{ item.price }}$</td>
-          </tr>
-          }
-        </tbody>
-      </table>
+      <ng-container *ngIf="showPrices$ | async">
+        <h2>{{ "RENT.PRICE" | translate }}</h2>
+        <table>
+          <tbody>
+            @for (item of (pricesList$ | async); track item.month) {
+            <tr>
+              <td>{{ "RENT.FILTER.MONTH." + item.month | translate }}</td>
+              <td>{{ "RENT.FROM" | translate }} {{ item.price }}$</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </ng-container>
       <p>
         {{ "RENT.PARAGRAPH_1" | translate }}
       </p>

@@ -66,6 +66,9 @@ export class HomeItemPageComponent {
   pricesList$: Observable<RentAvailablePrice[]> = this.home$.pipe(
     map((item) => this.rentService.getMonthsPrices(item))
   );
+  showPrices$ = this.pricesList$.pipe(
+    map((list) => !!list.length)
+  );
   desc$: Observable<string> = this.languageService.getLanguage().pipe(
     withLatestFrom(this.home$),
     map(([lang, item]) => item?.desc[lang] || '')

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, shareReplay } from 'rxjs';
 
-import { ApiService } from '../../../../shared/services/api.service';
+import { ApiService } from '../../../../shared/consts/api.service';
 import {
   Month,
   RentAvailablePrice,
@@ -76,6 +76,6 @@ export class RentService {
       return 0;
     }
     const prices = this.getMonthsPrices(homeItem).map((item) => item.price);
-    return Math.min(...prices);
+    return !!prices.length ? Math.min(...prices) : 0;
   }
 }
