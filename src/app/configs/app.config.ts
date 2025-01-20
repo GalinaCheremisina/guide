@@ -1,14 +1,8 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
-  InjectionToken,
 } from '@angular/core';
-import {
-  HttpClient,
-  HttpClientModule,
-  provideHttpClient,
-  withFetch,
-} from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -30,7 +24,6 @@ export function translateHttpLoaderFactory(http: HttpClient) {
 
 export const mainConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(HttpClientModule),
     provideRouter(appRoutes),
     provideClientHydration(),
     provideAnimationsAsync(),
