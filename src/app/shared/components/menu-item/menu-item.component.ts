@@ -5,12 +5,11 @@ import { MenuItem } from '../../interfaces/menu.interface';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-menu-item',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, TranslateModule],
-  templateUrl: './menu-item.component.html',
-  styleUrl: './menu-item.component.scss',
+    selector: 'app-menu-item',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [RouterLink, TranslateModule],
+    templateUrl: './menu-item.component.html',
+    styleUrl: './menu-item.component.scss'
 })
 export class MenuItemComponent {
   @Input() menuItem: MenuItem | undefined;

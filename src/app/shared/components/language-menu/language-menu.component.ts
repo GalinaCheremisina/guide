@@ -10,18 +10,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
-  selector: 'app-language-menu',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    TranslateModule,
-  ],
-  templateUrl: './language-menu.component.html',
-  styleUrl: './language-menu.component.scss',
+    selector: 'app-language-menu',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        TranslateModule,
+    ],
+    templateUrl: './language-menu.component.html',
+    styleUrl: './language-menu.component.scss'
 })
 export class LanguageMenuComponent {
   showMenu$: BehaviorSubject<boolean> = new BehaviorSubject(false);

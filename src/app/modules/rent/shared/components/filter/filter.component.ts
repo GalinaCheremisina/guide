@@ -22,20 +22,19 @@ import { locations } from '../../const/rent.consts';
 import { RentService } from '../../services/rent.service';
 
 @Component({
-  selector: 'app-filter-rent',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    RouterLink,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    FormsModule,
-    CommonModule,
-    TranslateModule,
-  ],
-  templateUrl: './filter.component.html',
-  styleUrl: './filter.component.scss',
+    selector: 'app-filter-rent',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        RouterLink,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslateModule,
+    ],
+    templateUrl: './filter.component.html',
+    styleUrl: './filter.component.scss'
 })
 export class FilterRentComponent {
   @Input() type: 'villa' | 'appart' | 'transfer' = 'villa';

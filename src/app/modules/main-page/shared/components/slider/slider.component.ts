@@ -7,14 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MainPageService } from '../../../../../shared/services/main-page.service';
 
 @Component({
-  selector: 'app-slider',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, NgOptimizedImage,
-    MatButtonModule,
-    MatIconModule,],
-  templateUrl: './slider.component.html',
-  styleUrl: './slider.component.scss',
+    selector: 'app-slider',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule, NgOptimizedImage,
+        MatButtonModule,
+        MatIconModule,],
+    templateUrl: './slider.component.html',
+    styleUrl: './slider.component.scss'
 })
 export class SliderComponent {
   images$: Observable<string[]> = this.mainPageService.getSliders();
