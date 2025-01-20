@@ -64,7 +64,8 @@ export class HomeItemPageComponent {
     })
   );
   pricesList$: Observable<RentAvailablePrice[]> = this.home$.pipe(
-    map((item) => this.rentService.getMonthsPrices(item))
+    map((item) => this.rentService.getMonthsPrices(item)),
+    map((prices) => prices.filter(p => !!p.price))
   );
   showPrices$ = this.pricesList$.pipe(
     map((list) => !!list.length)

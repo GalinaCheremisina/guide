@@ -8,10 +8,10 @@
       <p class="home-title">{{ homeItem.title }}</p>
       <p>{{ "RENT.FILTER.LOCATION." + homeItem.location | translate }}</p>
     </div>
-    @if (getStartPrice()) {
+    @if (startPrice) {
     <div>
       <p class="home-price">
-        {{ "RENT.PRICE_FROM" | translate }} {{ getStartPrice() }}$
+        {{ "RENT.PRICE_FROM" | translate }} {{ startPrice }}$
       </p>
     </div>
     }
