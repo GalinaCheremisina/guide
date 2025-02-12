@@ -32,7 +32,6 @@ import { LanguageService } from '../../../../shared/services/language.service';
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        RentDialogComponent,
         TranslateModule,
     ],
     templateUrl: './home-item-page.component.html',

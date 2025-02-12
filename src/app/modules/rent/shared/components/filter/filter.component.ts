@@ -6,7 +6,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -25,7 +24,6 @@ import { RentService } from '../../services/rent.service';
     selector: 'app-filter-rent',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        RouterLink,
         MatFormFieldModule,
         MatSelectModule,
         MatInputModule,

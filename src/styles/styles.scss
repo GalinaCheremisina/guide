@@ -6,7 +6,8 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -70,8 +71,47 @@ $olu-guide-theme: mat.m2-define-light-theme(
 // that you are using.
 @include mat.all-component-themes($olu-guide-theme);
 
-@import "./shared/_colors";
-@import "./shared/_variables";
+:root {
+  --max-size: 100%;
+  --max-width: 1100px;
+  --spacing_1x: 4px;
+  --spacing_2x: 8px;
+  --spacing_3x: 12px;
+  --spacing_4x: 16px;
+  --spacing_6x: 24px;
+  --spacing_8x: 32px;
+  --spacing_12x: 48px;
+  --spacing_16x: 64px;
+  --spacing_24x: 96px;
+  --spacing_half: 2px;
+  --border_width_100: 1px;
+  --border_width_200: 2px;
+  --border_radius_100: 4px;
+  --border_radius_200: 8px;
+  --border_radius_300: 12px;
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --french-violet: oklch(47.66% 0.246 305.88);
+  --vivid-pink: oklch(69.02% 0.277 332.77);
+  --hot-red: oklch(61.42% 0.238 15.34);
+  --orange-red: oklch(63.32% 0.24 31.68);
+
+  --gray-font-900: oklch(19.37% 0.006 300.98);
+  --gray-font-700: oklch(36.98% 0.014 302.71);
+  --gray-font-400: oklch(70.9% 0.015 304.04);
+  --gray-font-light: oklch(0.94 0.01 304.16);
+  --gray-bg: oklch(0.97 0 0);
+
+  --dark-blue: oklch(0.22 0.08 264.21);
+  --blue-icon: oklch(0.72 0.13 220.62);
+  --blue: oklch(0.38 0.16 260.3);
+  --blue-hover: oklch(0.44 0.14 259.63);
+
+  --shadow_100: 0 2px 8px 0 rgba(26,26,26,0.16);
+  --shadow_200: 0 2px 16px 0 rgba(26,26,26,0.24);
+  --shadow_300: 0 4px 16px 0 rgba(26,26,26,0.32);
+}
+
 
 html,
 body {
