@@ -6,12 +6,11 @@ import { VillaItem } from '../../../../../shared/interfaces/rent.interface';
 import { RentService } from '../../services/rent.service';
 
 @Component({
-  selector: 'app-home-item',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule],
-  templateUrl: './home-item.component.html',
-  styleUrl: './home-item.component.scss',
+    selector: 'app-home-item',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [TranslateModule],
+    templateUrl: './home-item.component.html',
+    styleUrl: './home-item.component.scss'
 })
 export class HomeItemComponent {
   @Input() homeItem: VillaItem | undefined;

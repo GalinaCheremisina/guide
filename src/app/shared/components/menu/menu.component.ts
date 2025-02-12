@@ -18,12 +18,11 @@ import { MenuItem } from '../../interfaces/menu.interface';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, MenuItemComponent],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss',
+    selector: 'app-menu',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule, MenuItemComponent],
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
   routes: Array<readonly MenuItem[]> = [

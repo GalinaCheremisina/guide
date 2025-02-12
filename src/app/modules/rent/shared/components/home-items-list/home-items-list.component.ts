@@ -10,17 +10,16 @@ import { HomeLocation, Month, RentFilter, VillaItem } from '../../../../../share
 import { RentService } from '../../services/rent.service';
 
 @Component({
-  selector: 'app-home-items-list',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    HomeItemComponent,
-    FilterRentComponent,
-    TranslateModule
-  ],
-  templateUrl: './home-items-list.component.html',
-  styleUrl: './home-items-list.component.scss',
+    selector: 'app-home-items-list',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        HomeItemComponent,
+        FilterRentComponent,
+        TranslateModule
+    ],
+    templateUrl: './home-items-list.component.html',
+    styleUrl: './home-items-list.component.scss'
 })
 export class HomeItemsListComponent {
   filter$: BehaviorSubject<RentFilter> = new BehaviorSubject({});

@@ -18,21 +18,20 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RentService } from '../../shared/services/rent.service';
 
 @Component({
-  selector: 'app-add-house',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    TranslateModule,
-  ],
-  templateUrl: './add-house.component.html',
-  styleUrl: './add-house.component.scss',
+    selector: 'app-add-house',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        TranslateModule,
+    ],
+    templateUrl: './add-house.component.html',
+    styleUrl: './add-house.component.scss'
 })
 export class AddHouseComponent {
   sended$: BehaviorSubject<boolean> = new BehaviorSubject(false);

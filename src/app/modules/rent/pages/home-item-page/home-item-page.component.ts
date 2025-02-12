@@ -25,19 +25,17 @@ import { RentDialogComponent } from '../../shared/components/rent-dialog/rent-di
 import { LanguageService } from '../../../../shared/services/language.service';
 
 @Component({
-  selector: 'app-home-item-page',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule,
-    RentDialogComponent,
-    TranslateModule,
-  ],
-  templateUrl: './home-item-page.component.html',
-  styleUrl: './home-item-page.component.scss',
+    selector: 'app-home-item-page',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule,
+        TranslateModule,
+    ],
+    templateUrl: './home-item-page.component.html',
+    styleUrl: './home-item-page.component.scss'
 })
 export class HomeItemPageComponent {
   private isVillaPage$: Observable<boolean> = this.route.data.pipe(

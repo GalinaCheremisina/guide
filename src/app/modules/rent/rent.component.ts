@@ -6,12 +6,11 @@ import { rentRoutes } from './shared/const/rent.routes-const';
 import { InfoItemComponent } from '../../shared/components/info-item/info-item.component';
 
 @Component({
-  selector: 'rent-root',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [InfoItemComponent, TranslateModule],
-  templateUrl: './rent.component.html',
-  styleUrl: './rent.component.scss'
+    selector: 'rent-root',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [InfoItemComponent, TranslateModule],
+    templateUrl: './rent.component.html',
+    styleUrl: './rent.component.scss'
 })
 export class RentComponent {
   rentItems: MenuItem[] = rentRoutes.slice().filter(i => i.id !== 'base');

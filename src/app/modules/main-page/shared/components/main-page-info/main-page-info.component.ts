@@ -13,12 +13,11 @@ import {
 } from '../../../../../shared/interfaces/main-page.interface';
 
 @Component({
-  selector: 'app-main-page-info',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage, CommonModule, TranslateModule, RouterLink],
-  templateUrl: './main-page-info.component.html',
-  styleUrl: './main-page-info.component.scss',
+    selector: 'app-main-page-info',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgOptimizedImage, CommonModule, TranslateModule, RouterLink],
+    templateUrl: './main-page-info.component.html',
+    styleUrl: './main-page-info.component.scss'
 })
 export class MainPageInfoComponent {
   rentItems$: Observable<RentItem[]>;

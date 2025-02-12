@@ -6,12 +6,11 @@ import { Observable, map } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
-  selector: 'app-footer',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, CommonModule],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss',
+    selector: 'app-footer',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [RouterLink, CommonModule],
+    templateUrl: './footer.component.html',
+    styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
   telegramLink$: Observable<string> = this.languageService

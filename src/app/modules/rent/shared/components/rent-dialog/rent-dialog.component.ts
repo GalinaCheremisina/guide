@@ -18,20 +18,19 @@ import { VillaItem } from '../../../../../shared/interfaces/rent.interface';
 import { RentService } from '../../services/rent.service';
 
 @Component({
-  selector: 'app-rent-dialog',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    TranslateModule,
-  ],
-  templateUrl: './rent-dialog.component.html',
-  styleUrl: './rent-dialog.component.scss',
+    selector: 'app-rent-dialog',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatRadioModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        TranslateModule,
+    ],
+    templateUrl: './rent-dialog.component.html',
+    styleUrl: './rent-dialog.component.scss'
 })
 export class RentDialogComponent {
   readonly dialogRef = inject(MatDialogRef<RentDialogComponent>);

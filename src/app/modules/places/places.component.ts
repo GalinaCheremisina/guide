@@ -6,12 +6,11 @@ import { InfoItemComponent } from '../../shared/components/info-item/info-item.c
 import { MenuItem } from '../../shared/interfaces/menu.interface';
 
 @Component({
-  selector: 'places-root',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [InfoItemComponent, TranslateModule],
-  templateUrl: './places.component.html',
-  styleUrl: './places.component.scss',
+    selector: 'places-root',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [InfoItemComponent, TranslateModule],
+    templateUrl: './places.component.html',
+    styleUrl: './places.component.scss'
 })
 export class PlacesComponent {
   infoItems: MenuItem[] = placesRoutes.slice().filter(i => i.id !== 'base');
