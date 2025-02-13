@@ -1,10 +1,10 @@
 <ng-container *ngIf="home$ | async as home">
   <div class="home-wrapper">
-    <div class="home-title">
+    <div class="home-back">
       <button mat-icon-button aria-label (click)="goToVillasPage()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1>{{ home.title }}</h1>
+      <div>{{ "RENT.BACK" | translate }}</div>
     </div>
     <div class="home-images">
       <button
@@ -26,15 +26,58 @@
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
     </div>
+    <h1>{{ home.title }}</h1>
+    <div class="home-annons">
+      <p>{{ "RENT.ANNONS" | translate }}</p>
+      <ul>
+        <li>
+          <p>{{ home.guests }} {{ "RENT.GUESTS" | translate }}, </p>
+        </li>
+        <li>
+          <p>{{ home.bedrooms }} {{ ( home.bedrooms == 1 ? "RENT.BADROOM" : "RENT.BADROOMS") | translate }}, </p>
+        </li>
+        <li>
+          <p>{{ home.bathrooms }} {{ ( home.bathrooms == 1 ? "RENT.BATHROOM" : "RENT.BATHROOMS") | translate }}</p>
+        </li>
+      </ul>
+      <div>
+        <div><mat-icon>grade</mat-icon> 5</div>
+        <div>3 {{ "RENT.REVIEWS" | translate }}</div>
+      </div>
+    </div>
+    <div class="home-line"></div>
     <div class="home-desc">
       {{ desc$ | async }}
     </div>
+    <div class="home-line"></div>
+    <h2>{{ "RENT.OFFERS.TITLE" | translate }}</h2>
+    <div *ngIf="!!home.offers" class="home-offers">
+      @for (item of home.offers; track item) {
+        <div>
+          <span><mat-icon>{{ getOfferIcon(item) }}</mat-icon></span>
+          <span>{{ "RENT.OFFERS." + item.toLocaleUpperCase() | translate }}</span>
+        </div>
+      }
+    </div>
+    <div class="home-line"></div>
+    <!--div class="home-dates">
+      <h2>Date</h2>
+      <div style="width: 400px;">
+      @if (true) {
+
+      } @else {
+
+      }
+        <mat-calendar [(selected)]="selected" (selectedChange)="rangeChanged($event)"></mat-calendar>
+      </div>
+    </div>
+    <div class="home-line"></div-->
     <div class="home-price">
-      <ng-container *ngIf="showPrices$ | async">
+      <ng-container *ngIf="pricesList$ | async as pricesList">
         <h2>{{ "RENT.PRICE" | translate }}</h2>
         <table>
           <tbody>
-            @for (item of (pricesList$ | async); track item.month) {
+            @for (item of pricesList; track item.month) {
             <tr>
               <td>{{ "RENT.FILTER.MONTH." + item.month | translate }}</td>
               <td>{{ "RENT.FROM" | translate }} {{ item.price }}$</td>

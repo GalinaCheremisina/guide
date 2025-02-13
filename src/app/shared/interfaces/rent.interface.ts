@@ -14,6 +14,18 @@ export type Month =
 
 export type HomeLocation = 'Ovacik' | 'Hisaronu' | 'Fethiye';
 
+export type HomeOffers =
+  | 'pool'
+  | 'tv'
+  | 'kitchen'
+  | 'wifi'
+  | 'parking'
+  | 'washer'
+  | 'airConditioning'
+  | 'hairDryer'
+  | 'iron'
+  | 'pet';
+
 export interface VillaItem {
   id: string;
   title: string;
@@ -24,6 +36,10 @@ export interface VillaItem {
   prices: {[key: string]: number};
   image: string;
   images: string[];
+  guests: number;
+  bedrooms: number;
+  bathrooms: number;
+  offers: HomeOffers[];
 }
 
 export interface RentFilter {
@@ -34,4 +50,17 @@ export interface RentFilter {
 export interface RentAvailablePrice {
   month: Month;
   price: number;
+}
+
+export enum OfferIcon {
+  'pool' = 'pool',
+  'tv' = 'desktop_windows',
+  'kitchen' = 'countertops',
+  'wifi' = 'wifi',
+  'parking' = 'directions_car',
+  'washer' = 'local_laundry_service',
+  'airConditioning' = 'ac_unit',
+  'hairDryer' = 'air',
+  'iron' = 'iron',
+  'pet' = 'pets',
 }
