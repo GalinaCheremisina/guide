@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, model, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -17,18 +17,19 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   DateRange,
-  //DefaultMatCalendarRangeStrategy,
-  //MatCalendar,
-  //MatRangeDateSelectionModel,
+  MatCalendar,
+  MatDatepickerModule,
+  DefaultMatCalendarRangeStrategy,
+  MatRangeDateSelectionModel,
 } from '@angular/material/datepicker';
 
 import { RentService } from '../../shared/services/rent.service';
 import { MenuLinkService } from '../../../../shared/services/menu-link.service';
 import {
-  RentAvailablePrice,
   VillaItem,
   OfferIcon,
   HomeOffers,
+  monthList,
 } from '../../../../shared/interfaces/rent.interface';
 import { RentDialogComponent } from '../../shared/components/rent-dialog/rent-dialog.component';
 import { LanguageService } from '../../../../shared/services/language.service';
@@ -41,11 +42,15 @@ import { LanguageService } from '../../../../shared/services/language.service';
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        //MatCalendar,
+        MatCalendar,
+        MatDatepickerModule,
         TranslateModule,
     ],
-    providers: [provideNativeDateAdapter()],
-    //providers: [DefaultMatCalendarRangeStrategy, MatRangeDateSelectionModel],
+    providers: [
+      DefaultMatCalendarRangeStrategy,
+      MatRangeDateSelectionModel,
+      provideNativeDateAdapter()
+    ],
     templateUrl: './home-item-page.component.html',
     styleUrl: './home-item-page.component.scss'
 })
@@ -73,19 +78,13 @@ export class HomeItemPageComponent {
       return '';
     })
   );
-  pricesList$: Observable<RentAvailablePrice[]> = this.home$.pipe(
-    map((item) => this.rentService.getMonthsPrices(item)),
-    map((prices) => prices.filter(p => !!p.price))
-  );
-  showPrices$: Observable<boolean> = this.pricesList$.pipe(
-    map((list) => !!list.length)
-  );
   desc$: Observable<string> = this.languageService.getLanguage().pipe(
     withLatestFrom(this.home$),
     map(([lang, item]) => item?.desc[lang] || '')
   );
-  selectedDateRange: DateRange<Date> | undefined = undefined;
-  selected = model<Date | null>(null);
+  selectedDateRange = model<DateRange<Date> | null>(null);
+  today = new Date();
+  nigthsCount = computed(() => this.getCountDays(this.selectedDateRange()));
 
   constructor(
     private route: ActivatedRoute,
@@ -94,24 +93,32 @@ export class HomeItemPageComponent {
     private menuLinkService: MenuLinkService,
     private dialog: MatDialog,
     private languageService: LanguageService,
-    //private readonly selectionModel: MatRangeDateSelectionModel<Date>,
-    //private readonly selectionStrategy: DefaultMatCalendarRangeStrategy<Date>,
   ) {}
 
-  // Event handler for when the date range selection changes.
-  rangeChanged(selectedDate: Date | any) {
-    //console.log(selectedDate)
-    /*const selection = this.selectionModel.selection,
-      newSelection = this.selectionStrategy.selectionFinished(
-        selectedDate,
-        selection
-      );
+  getFinalPrice = (home: VillaItem) => {
+    if (this.languageService.isRussianLang()) {
+      const price = this.getPrice(home) * 100 + this.nigthsCount() * 500;
+      return price.toString();
+    } else {
+      return `$${this.getPrice(home)}`;
+    }
+  }
 
-    this.selectionModel.updateSelection(newSelection, this);
-    this.selectedDateRange = new DateRange<Date>(
-      newSelection.start,
-      newSelection.end
-    );*/
+  rangeChanged = (date: Date) => {
+    const range = this.selectedDateRange();
+    if (
+      !!range &&
+      range.start &&
+      date > range.start &&
+      !range.end
+    ) {
+      this.selectedDateRange.set(new DateRange(
+        range.start,
+        date
+      ));
+    } else {
+      this.selectedDateRange.set(new DateRange(date, null));
+    }
   }
 
   getOfferIcon = (type: HomeOffers) => OfferIcon[type];
@@ -130,9 +137,49 @@ export class HomeItemPageComponent {
 
   openDialog = (item: VillaItem) => {
     this.dialog.open(RentDialogComponent, {
-      data: { item },
+      data: {
+        item,
+        dates: this.selectedDateRange(),
+        nigthsCount: this.nigthsCount(),
+        price: this.getFinalPrice(item),
+        lang: this.languageService.isRussianLang()
+      },
       width: '450px',
       scrollStrategy: new NoopScrollStrategy(),
     });
   };
+
+  private getPrice = (home: VillaItem) => {
+    const range = this.selectedDateRange();
+    const countPrice = () => {
+      const count = this.nigthsCount();
+      if (count > 30) {
+        return 0;
+      }
+      if (range!.start!.getMonth() == range!.end!.getMonth()) {
+        const dayPrice = this.getMonthPrice(home, monthList[range!.start!.getMonth()].name);
+        return count * dayPrice;
+      } else {
+        const firstMonth = monthList[range!.start!.getMonth()];
+        const lastMonth = monthList[range!.end!.getMonth()];
+        const daysFirstMonth = Math.ceil(this.getCountDays(new DateRange(range!.start, firstMonth.last)));
+        const price = daysFirstMonth * this.getMonthPrice(home, firstMonth.name) +
+          (count - daysFirstMonth)*this.getMonthPrice(home, lastMonth.name);
+        return price;
+      }
+    }
+
+    return !!range && range.start && range.end ? countPrice() : 0;
+  }
+
+  private getMonthPrice = (home: VillaItem, month: string) => home.prices[month];
+
+  private getCountDays = (range: DateRange<Date> | null) => {
+    if (!!range && range.start && range.end) {
+      const time = range.end.getTime() - range.start.getTime();
+      return time/86400000;
+    } else {
+      return 0;
+    }
+  }
 }

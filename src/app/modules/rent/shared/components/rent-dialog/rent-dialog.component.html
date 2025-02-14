@@ -1,8 +1,16 @@
 <div class="dialog-wrapper">
-  <h2>{{ "RENT.FORM.TITLE" | translate }}</h2>
   <div class="dialog-info">
     <h3>{{ title }}</h3>
     <img [src]="img" />
+    <div>
+      @if (!!data.nigthsCount) {
+        <p>
+          {{ data.dates!.start  | date }} - {{ data.dates!.end  | date }}
+          ({{ data.nigthsCount }} {{ ("RENT." + (data.nigthsCount == 1 ? "NIGHT" : (data.nigthsCount < 5) ? "NIGHTS" : "NIGHTSS")) | translate }})
+        </p>
+        <h3>{{ "RENT.PRICE" | translate }} {{ data.price }} {{ "RENT.CURRENCY" | translate }}</h3>
+      }
+    </div>
   </div>
   <div class="dialog-form">
     @if (sended$ | async) {
@@ -26,6 +34,15 @@
           <input formControlName="name" matInput />
         </mat-form-field>
         <mat-form-field class="input-full-width">
+          <mat-label>{{ "RENT.FORM.GUESTS" | translate }}</mat-label>
+          <input
+            formControlName="guests"
+            matInput
+            type="number"
+          />
+        </mat-form-field>
+        @if (!data.nigthsCount) {
+        <mat-form-field class="input-full-width">
           <mat-label>{{ "RENT.FILTER.MONTH.TITLE" | translate }}</mat-label>
           <mat-select formControlName="month">
             @for (month of months; track month) {
@@ -35,6 +52,7 @@
             }
           </mat-select>
         </mat-form-field>
+        }
         <div class="input-full-width checkbox">
           <p>{{ "RENT.FORM.PREFER" | translate }}</p>
           <mat-radio-group formControlName="type">
@@ -52,7 +70,7 @@
       <button
         class="active-button"
         (click)="sendMessage()"
-        [disabled]="noValid(form.get('phone')?.value, form.get('month')?.value)"
+        [disabled]="noValid(form.get('phone')?.value)"
       >
         {{ "RENT.FORM.SEND" | translate }}
       </button>

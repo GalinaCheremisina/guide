@@ -23,6 +23,8 @@ export class LanguageService {
 
   public getLanguage = () => this.currentLanguage$.asObservable();
 
+  public isRussianLang = () => this.currentLanguage$.value == environment.defaultLang;
+
   public setLanguage = (lang: string = environment.defaultLang) => {
     this.localStorage?.setItem('currentLanguage', lang);
     this.translate.use(lang);
