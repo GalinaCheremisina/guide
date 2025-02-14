@@ -42,7 +42,7 @@
       </ul>
       <div>
         <div><mat-icon>grade</mat-icon> 5</div>
-        <div>3 {{ "RENT.REVIEWS" | translate }}</div>
+        <div>{{ home.reviews.length }} {{ "RENT.REVIEWS" | translate }}</div>
       </div>
     </div>
     <div class="home-line"></div>
@@ -51,7 +51,7 @@
     </div>
     <div class="home-line"></div>
     <h2>{{ "RENT.OFFERS.TITLE" | translate }}</h2>
-    <div *ngIf="!!home.offers" class="home-offers">
+    <div class="home-offers">
       @for (item of home.offers; track item) {
         <div>
           <span><mat-icon>{{ getOfferIcon(item) }}</mat-icon></span>
@@ -60,38 +60,36 @@
       }
     </div>
     <div class="home-line"></div>
-    <!--div class="home-dates">
-      <h2>Date</h2>
-      <div style="width: 400px;">
-      @if (true) {
-
-      } @else {
-
-      }
-        <mat-calendar [(selected)]="selected" (selectedChange)="rangeChanged($event)"></mat-calendar>
+    <div class="home-dates">
+      <div>
+        <h2>{{ "RENT.PRICE" | translate }}</h2>
+        @if (!!nigthsCount()) {
+          <h2>{{ getFinalPrice(home) }} {{ "RENT.CURRENCY" | translate }}</h2>
+        }
+      </div>
+      <div>
+        <div class="calendar">
+          @if (!!nigthsCount()) {
+            <p>
+              {{ selectedDateRange()!.start  | date }} - {{ selectedDateRange()!.end  | date }}
+              ({{ nigthsCount() }} {{ ("RENT." + (nigthsCount() == 1 ? "NIGHT" : (nigthsCount() < 5) ? "NIGHTS" : "NIGHTSS")) | translate }})
+            </p>
+          } @else {
+            <p>{{ "RENT.CHOSE_DATES" | translate }}</p>
+          }
+          <mat-calendar
+            [selected]="selectedDateRange()"
+            [minDate]="today"
+            (selectedChange)="rangeChanged($event)">
+          </mat-calendar>
+        </div>
       </div>
     </div>
-    <div class="home-line"></div-->
-    <div class="home-price">
-      <ng-container *ngIf="pricesList$ | async as pricesList">
-        <h2>{{ "RENT.PRICE" | translate }}</h2>
-        <table>
-          <tbody>
-            @for (item of pricesList; track item.month) {
-            <tr>
-              <td>{{ "RENT.FILTER.MONTH." + item.month | translate }}</td>
-              <td>{{ "RENT.FROM" | translate }} {{ item.price }}$</td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </ng-container>
-      <p>
-        {{ "RENT.PARAGRAPH_1" | translate }}
-      </p>
-      <button class="active-button" (click)="openDialog(home)">
-        {{ "RENT.DETAILS" | translate }}
-      </button>
-    </div>
+    <p>
+      {{ "RENT.PARAGRAPH_1" | translate }}
+    </p>
+    <button class="active-button" (click)="openDialog(home)">
+      {{ "RENT.DETAILS" | translate }}
+    </button>
   </div>
 </ng-container>

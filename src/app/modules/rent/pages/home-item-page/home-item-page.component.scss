@@ -110,6 +110,21 @@
       }
     }
 
+    &-dates {
+      margin: 15px 0;
+
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 400px;
+      }
+
+      .calendar {
+        width: 400px;
+      }
+    }
+
     &-line {
       height: 1px;
       background-color: var(--gray-font-400);
