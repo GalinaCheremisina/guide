@@ -149,16 +149,14 @@ export class HomeItemPageComponent {
     });
   };
 
-  private getPrice = (home: VillaItem) => {
-    const range = this.selectedDateRange();
+  private getPrice = (home: VillaItem, range = this.selectedDateRange(), lastDay = false) => {
+    const count = this.getCountDays(range);
+    const inOneMonth = range!.start!.getMonth() == range!.end!.getMonth();
+
     const countPrice = () => {
-      const count = this.nigthsCount();
-      if (count > 30) {
-        return 0;
-      }
-      if (range!.start!.getMonth() == range!.end!.getMonth()) {
+      if (inOneMonth) {
         const dayPrice = this.getMonthPrice(home, monthList[range!.start!.getMonth()].name);
-        return count * dayPrice;
+        return (lastDay ? count + 1 : count) * dayPrice;
       } else {
         const firstMonth = monthList[range!.start!.getMonth()];
         const lastMonth = monthList[range!.end!.getMonth()];
@@ -167,6 +165,20 @@ export class HomeItemPageComponent {
           (count - daysFirstMonth)*this.getMonthPrice(home, lastMonth.name);
         return price;
       }
+    }
+
+    if (this.nigthsCount() > 30 && !inOneMonth) {
+      const months = Array.from(
+        {length: range!.end!.getMonth() - range!.start!.getMonth() + 1},
+        (_, i) => i + range!.start!.getMonth(),
+      );
+      const result: number = months.reduce((sum, item, i) => {
+        const start = !i ? range!.start : monthList[item].first;
+        const end = i == months.length - 1 ? range!.end : monthList[item].last;
+        return sum + this.getPrice(home, new DateRange(start, end), i !== months.length - 1);
+      }, 0);
+
+      return result;
     }
 
     return !!range && range.start && range.end ? countPrice() : 0;
