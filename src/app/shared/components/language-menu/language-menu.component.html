@@ -1,4 +1,4 @@
-<ng-container *ngIf="currentLanguage$ | async as currentLanguage">
+@if (currentLanguage$ | async; as currentLanguage) {
   <button mat-fab extended [matMenuTriggerFor]="menu">
     <mat-icon>language</mat-icon>
     {{ "COMMON.LANGUAGE" + "." + currentLanguage | translate }}
@@ -16,4 +16,4 @@
     </button>
     }
   </mat-menu>
-</ng-container>
+}

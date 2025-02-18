@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   BehaviorSubject,
   Observable,
@@ -20,7 +20,7 @@ import { MenuItemComponent } from '../menu-item/menu-item.component';
 @Component({
     selector: 'app-menu',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CommonModule, MenuItemComponent],
+    imports: [AsyncPipe, MenuItemComponent],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss'
 })

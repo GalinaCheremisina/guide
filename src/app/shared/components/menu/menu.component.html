@@ -4,7 +4,7 @@
   </svg>
 </div>
 <ul class="menu" [class.hidden]="!(showMobileMenu$ | async)">
-  <ng-container *ngIf="currentUrl$ | async as currentUrl">
+  @if (currentUrl$ | async; as currentUrl) {
     @for (route of routes; track route; let index = $index) {
     <li>
       <app-menu-item
@@ -25,7 +25,7 @@
       </div>
     </li>
     }
-  </ng-container>
+  }
 </ul>
 
 <!--li>

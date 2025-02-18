@@ -1,4 +1,4 @@
-<ng-container *ngIf="home$ | async as home">
+@if (home$ | async; as home) {
   <div class="home-wrapper">
     <div class="home-back">
       <button mat-icon-button aria-label (click)="goToVillasPage()">
@@ -92,4 +92,4 @@
       {{ "RENT.DETAILS" | translate }}
     </button>
   </div>
-</ng-container>
+}

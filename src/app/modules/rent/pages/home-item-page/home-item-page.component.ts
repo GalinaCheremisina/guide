@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, model, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, model } from '@angular/core';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   BehaviorSubject,
@@ -38,13 +38,14 @@ import { LanguageService } from '../../../../shared/services/language.service';
     selector: 'app-home-item-page',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        CommonModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDialogModule,
-        MatCalendar,
-        MatDatepickerModule,
-        TranslateModule,
+      AsyncPipe,
+      DatePipe,
+      MatButtonModule,
+      MatIconModule,
+      MatDialogModule,
+      MatCalendar,
+      MatDatepickerModule,
+      TranslateModule,
     ],
     providers: [
       DefaultMatCalendarRangeStrategy,
