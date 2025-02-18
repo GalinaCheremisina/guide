@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,9 +9,13 @@ import { MainPageService } from '../../../../../shared/services/main-page.servic
 @Component({
     selector: 'app-slider',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CommonModule, NgOptimizedImage,
-        MatButtonModule,
-        MatIconModule,],
+    imports: [
+      AsyncPipe,
+      NgClass,
+      NgOptimizedImage,
+      MatButtonModule,
+      MatIconModule,
+    ],
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss'
 })

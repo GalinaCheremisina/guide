@@ -24,9 +24,11 @@
     >
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
-    <div *ngIf="mainImageSrc$ | async as mainImageSrc" class="home-image">
-      <img [ngSrc]="mainImageSrc" width="900" height="400" priority />
-    </div>
+    @if (mainImageSrc$ | async; as mainImageSrc) {
+      <div class="home-image">
+        <img [ngSrc]="mainImageSrc" width="900" height="400" priority />
+      </div>
+    }
     <button
       mat-icon-button
       aria-label

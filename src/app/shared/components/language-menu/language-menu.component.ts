@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +13,7 @@ import { LanguageService } from '../../services/language.service';
     selector: 'app-language-menu',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        CommonModule,
+        AsyncPipe,
         MatButtonModule,
         MatIconModule,
         MatMenuModule,
