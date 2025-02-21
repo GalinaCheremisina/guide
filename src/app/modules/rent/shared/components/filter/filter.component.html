@@ -1,9 +1,9 @@
 <div class="home-filter-wrapper">
   <mat-form-field>
     <mat-label>{{ "RENT.FILTER.MONTH.TITLE" | translate }}</mat-label>
-    <mat-select [value]="filter?.month">
+    <mat-select [value]="filter()?.month">
       @for (month of months; track month) {
-      <mat-option [value]="month" (click)="monthSelected.next(month)">
+      <mat-option [value]="month" (click)="monthSelected.emit(month)">
         {{ "RENT.FILTER.MONTH." + month | translate }}
       </mat-option>
       }
@@ -11,9 +11,9 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>{{ "RENT.FILTER.LOCATION.TITLE" | translate }}</mat-label>
-    <mat-select [value]="filter?.location">
+    <mat-select [value]="filter()?.location">
       @for (location of locations; track location) {
-      <mat-option [value]="location" (click)="locationSelected.next(location)">
+      <mat-option [value]="location" (click)="locationSelected.emit(location)">
         {{ "RENT.FILTER.LOCATION." + location | translate }}
       </mat-option>
       }
@@ -22,8 +22,8 @@
   <button
     mat-flat-button
     class="active-gray-button"
-    [disabled]="!filter?.location && !filter?.month"
-    (click)="clearFilter.next()"
+    [disabled]="!filter()?.location && !filter()?.month"
+    (click)="clearFilter.emit()"
   >
   {{ "RENT.FILTER.CLEAR" | translate }}
   </button>

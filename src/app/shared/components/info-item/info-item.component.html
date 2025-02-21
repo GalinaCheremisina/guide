@@ -1,4 +1,4 @@
-@if (item) {
+@if (item(); as item) {
 <a [routerLink]="item.link">
   <img [src]="'/assets/img/' + item.image" />
   <p>

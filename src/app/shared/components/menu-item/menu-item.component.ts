@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { MenuItem } from '../../interfaces/menu.interface';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-menu-item',
@@ -12,12 +12,12 @@ import { TranslateModule } from '@ngx-translate/core';
     styleUrl: './menu-item.component.scss'
 })
 export class MenuItemComponent {
-  @Input() menuItem: MenuItem | undefined;
-  @Input() menuItemType: 'parent' | 'child' = 'child';
-  @Input() currentUrl!: string;
-  @Output() hideMenuList: EventEmitter<boolean> = new EventEmitter();
+  menuItem = input.required<MenuItem>();
+  menuItemType = input<'parent' | 'child'>('child');
+  currentUrl = input<string>();
+  hideMenuList = output<boolean>();
 
   isActiveMenu = (node: string) =>
-    (this.currentUrl === node || this.currentUrl.includes(`${node}/`)) &&
-    this.menuItemType === 'parent';
+    (this.currentUrl() === node || this.currentUrl()?.includes(`${node}/`)) &&
+    this.menuItemType() === 'parent';
 }

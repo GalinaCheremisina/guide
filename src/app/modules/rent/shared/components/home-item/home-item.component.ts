@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
@@ -13,15 +13,14 @@ import { RentService } from '../../services/rent.service';
     styleUrl: './home-item.component.scss'
 })
 export class HomeItemComponent {
-  @Input() homeItem: VillaItem | undefined;
-  @Input() isVillaPage: boolean = true;
+  homeItem = input.required<VillaItem>();
 
   get startPrice() {
-    return this.rentService.getLowerPrice(this.homeItem);
+    return this.rentService.getLowerPrice(this.homeItem());
   }
 
   constructor(private router: Router, private rentService: RentService) {}
 
   showDetailsPage = () =>
-    this.router.navigate([this.router.url, this.homeItem?.id]);
+    this.router.navigate([this.router.url, this.homeItem().id]);
 }

@@ -1,8 +1,9 @@
-@if (menuItem) { @if (menuItemType === "parent") {
+@if (menuItem(); as menuItem) {
+@if (menuItemType() === "parent") {
 <a
-  [class.section]="menuItemType === 'parent'"
   [class.active]="isActiveMenu(menuItem.link)"
   [routerLink]="menuItem.link"
+  class="section"
 >
   <span>
     <ng-content></ng-content>
@@ -13,8 +14,8 @@
 </a>
 } @else {
 <li>
-  <a [routerLink]="menuItem.link" (click)="hideMenuList.next(true)">
+  <a [routerLink]="menuItem.link" (click)="hideMenuList.emit(true)">
     {{ 'COMMON.MAIN_MENU' + '.' + menuItem.title | translate }}
   </a>
 </li>
-} }
+}}
