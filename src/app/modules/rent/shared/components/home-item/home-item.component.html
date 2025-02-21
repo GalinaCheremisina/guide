@@ -1,4 +1,4 @@
-@if (!!homeItem) {
+@if (homeItem(); as homeItem) {
 <div class="home-item-wrapper" (click)="showDetailsPage()">
   <div class="home-item-img">
     <img [src]="homeItem.image" />

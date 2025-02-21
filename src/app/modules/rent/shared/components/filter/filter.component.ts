@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
+  input,
+  output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -35,12 +34,10 @@ import { RentService } from '../../services/rent.service';
     styleUrl: './filter.component.scss'
 })
 export class FilterRentComponent {
-  @Input() type: 'villa' | 'appart' | 'transfer' = 'villa';
-  @Input() filter: RentFilter | null = {};
-  @Output() monthSelected: EventEmitter<Month> = new EventEmitter<Month>();
-  @Output() locationSelected: EventEmitter<HomeLocation> =
-    new EventEmitter<HomeLocation>();
-  @Output() clearFilter: EventEmitter<void> = new EventEmitter();
+  filter = input<RentFilter | null>({});
+  monthSelected = output<Month>();
+  locationSelected = output<HomeLocation>();
+  clearFilter = output<void>();
 
   months = this.rentService.getNextMonths();
   locations = locations;

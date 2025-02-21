@@ -48,7 +48,7 @@ export class MenuComponent {
   }
 
   getParentMenuItem = (items: readonly MenuItem[]) =>
-    items.find((i) => i.id === 'base');
+    items.find((i) => i.id === 'base')!;
 
   getChildrenMenuItems = (items: readonly MenuItem[]) =>
     items.slice().filter((i) => i.id !== 'base');
